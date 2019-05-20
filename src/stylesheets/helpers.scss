@@ -1,0 +1,12 @@
+@mixin define-icon($url, $size: 22px) {
+  width: $size;
+  height: $size;
+  -webkit-mask-image: url($url);
+  -webkit-mask-position: center;
+  -webkit-mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url($url);
+  mask-position: center;
+  mask-size: cover;
+  mask-repeat: no-repeat;
+}

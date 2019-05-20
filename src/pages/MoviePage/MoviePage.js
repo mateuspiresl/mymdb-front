@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, type Node } from 'react';
 import { connect } from 'react-redux';
 import type { Match } from 'react-router-dom';
 
@@ -23,7 +23,11 @@ const strings = {
   loading: 'loading',
 };
 
-function render(content) {
+function getImageSource(path: string) {
+  return `https://image.tmdb.org/t/p/original${path}`;
+}
+
+function render(content: Node) {
   return (
     <Page className="MoviePage" page={pages.movie}>
       {content}
@@ -54,10 +58,20 @@ function MoviePage({
   }
 
   return render((
-    <div key={movie.id}>
-      <h3>{movie.title}</h3>
-      <p>{movie.overview}</p>
-    </div>
+    <>
+      <img className="backdrop" src={getImageSource(movie.backdrop_path)} alt={movie.title} />
+      <div className="container">
+        <div className="overlay">
+          <p className="tagline">{movie.tagline}</p>
+          <h2 className="title">{movie.title}</h2>
+          <p className="overview">{movie.overview}</p>
+          <p className="rate">
+            <span className="start-icon" />
+            {movie.vote_average}
+          </p>
+        </div>
+      </div>
+    </>
   ));
 }
 

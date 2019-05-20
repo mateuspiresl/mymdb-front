@@ -1,3 +1,5 @@
+@import '../../stylesheets/colors.scss';
+
 .Poster {
   flex: 0;
   position: relative;
@@ -26,7 +28,7 @@
       justify-content: space-evenly;
       align-items: center;
       padding: 16px;
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: $black-80p;
 
       opacity: 0;
       -webkit-transition: opacity linear 0.2s;
