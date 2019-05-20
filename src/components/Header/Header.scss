@@ -1,0 +1,13 @@
+@import '../../stylesheets/colors.scss';
+
+.Header {
+  display: flex;
+
+  .left {
+    justify-self: flex-start;
+  }
+
+  .center {
+    justify-self: center;
+  }
+}

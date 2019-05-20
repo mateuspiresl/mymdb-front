@@ -1,0 +1,8 @@
+.Page {
+  display: flex;
+  flex-direction: column;
+
+  > .content {
+    flex: 1;
+  }
+}
