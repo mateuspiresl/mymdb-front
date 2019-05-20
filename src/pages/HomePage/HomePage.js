@@ -1,42 +1,29 @@
-// @flow
+/* @flow */
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter, type RouterHistory } from 'react-router-dom';
 
 import Page from '../../components/Page';
+import Clickable from '../../components/Clickable';
 import pages from '../../config/pages';
+import type { PartialMovie } from '../../types/apiTypes';
 
 import './HomePage.scss';
 
-type Movie = {
-  id: number,
-  title: string,
-  overview: string,
-  release_date: string,
-  original_language: string,
-  original_title: string,
-  vote_count: number,
-  vote_average: number,
-  popularity: number,
-  genre_ids: Array<number>,
-  poster_path: string,
-  backdrop_path: string,
-  video: boolean,
-  adult: boolean,
-};
-
 type Props = {
-  movies: Array<Movie>
+  movies: PartialMovie[],
+  history: RouterHistory,
 };
 
-function HomePage({ movies }: Props) {
+function HomePage({ movies, history }: Props) {
   return (
     <Page className="HomePage" page={pages.home}>
       <div className="grid">
-        {movies.map(movie => (
-          <div key={movie.id}>
+        {movies.map((movie: PartialMovie) => (
+          <Clickable key={movie.id} onClick={() => history.push(`/movies/${movie.id}`)}>
             {movie.title}
-          </div>
+          </Clickable>
         ))}
       </div>
     </Page>
@@ -47,4 +34,4 @@ const mapStateToProps = ({ movies }) => ({
   movies: movies.list.data,
 });
 
-export default connect(mapStateToProps)(HomePage);
+export default withRouter(connect(mapStateToProps)(HomePage));

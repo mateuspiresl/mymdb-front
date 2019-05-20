@@ -1,29 +1,27 @@
 /* @flow */
 
-import { Action } from 'redux';
-
 import * as types from '../actions/types';
-
-type Movie = Object;
+import type { Movie, PartialMovie } from '../types/apiTypes';
+import type { Action } from '../types/reduxTypes';
 
 type MovieState = {
-  data: Movie,
-  loading: boolean,
-  error: string | null,
+  +data: Movie | null,
+  +loading: boolean,
+  +error: string | null,
 };
 
 type ListState = {
-  search: string,
-  data: Array<Movie>,
-  page: number,
-  hasMore: boolean,
-  loading: boolean,
-  error: string | null,
+  +search: string,
+  +data: PartialMovie[],
+  +page: number,
+  +hasMore: boolean,
+  +loading: boolean,
+  +error: string | null,
 };
 
 type State = {
-  movie: MovieState,
-  list: ListState,
+  +movie: MovieState,
+  +list: ListState,
 };
 
 const initialState: State = {
@@ -42,10 +40,15 @@ const initialState: State = {
   },
 };
 
-function movieReducer(state: MovieState, { type, payload }: Action): MovieState {
+function movieReducer(state: MovieState, { type, payload = {} }: Action): MovieState {
   switch (type) {
     case types.MOVIES_FETCH:
-      return { ...state, data: null, loading: true };
+      return {
+        ...state,
+        data: null,
+        loading: true,
+        error: null,
+      };
 
     case types.MOVIES_FETCH_SUCCESS:
       return { ...state, data: payload.data, loading: false };
@@ -57,10 +60,15 @@ function movieReducer(state: MovieState, { type, payload }: Action): MovieState 
   }
 }
 
-function listReducer(state: ListState, { type, payload }: Action): ListState {
+function listReducer(state: ListState, { type, payload = {} }: Action): ListState {
   switch (type) {
     case types.MOVIES_FETCH_MANY:
-      return { ...state, search: payload.search, loading: true };
+      return {
+        ...state,
+        search: payload.search,
+        loading: true,
+        error: null,
+      };
 
     case types.MOVIES_FETCH_MANY_SUCCESS:
       // Ignore responses for different search strings

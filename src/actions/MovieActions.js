@@ -1,10 +1,9 @@
 /* @flow */
 
-import type { Dispatch } from 'redux';
-
 import * as MoviesApi from '../api/MoviesApi';
 import { errorParser } from '../utils/ActionUtils';
 import * as types from './types';
+import type { Dispatch } from '../types/reduxTypes';
 
 const parseError = errorParser();
 
