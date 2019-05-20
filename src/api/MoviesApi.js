@@ -6,12 +6,15 @@ type Query = {
   title?: string,
 };
 
-export function getMovie(id: number) {
-  return http.get(`movies/${id}`);
+export async function getMovie(id: number) {
+  const { data } = await http.get(`movies/${id}`);
+  return data;
 }
 
-export function getManyMovies(query?: Query = {}) {
-  return http.get('movies', {
-    params: { title: query.title },
+export async function getManyMovies(query?: Query = {}, page?: number = 1) {
+  const { data } = await http.get('movies', {
+    params: { title: query.title || undefined, page },
   });
+
+  return data;
 }

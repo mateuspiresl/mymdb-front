@@ -21,31 +21,21 @@ export function fetchMovie(id: number) {
   };
 }
 
-export function fetchPopularMovies() {
-  return async (dispatch: Dispatch) => {
-    dispatch({ type: types.MOVIES_FETCH_MANY });
-
-    try {
-      const data = await MoviesApi.getManyMovies();
-      dispatch({ type: types.MOVIES_FETCH_MANY_SUCCESS, payload: { data } });
-    } catch (error) {
-      dispatch({ type: types.MOVIES_FETCH_MANY_FAIL, payload: parseError(error) });
-    }
-  };
-}
-
-export function searchMoviesByTitle(title: string) {
+export function fetchMoviesList(title: string, page?: number = 1) {
   return async (dispatch: Dispatch) => {
     dispatch({ type: types.MOVIES_FETCH_MANY, payload: { search: title } });
 
     try {
-      const data = await MoviesApi.getManyMovies({ title });
+      const data = await MoviesApi.getManyMovies({ title }, page);
       dispatch({
         type: types.MOVIES_FETCH_MANY_SUCCESS,
         payload: { data, search: title },
       });
     } catch (error) {
-      dispatch({ type: types.MOVIES_FETCH_MANY_FAIL, payload: parseError(error) });
+      dispatch({
+        type: types.MOVIES_FETCH_MANY_FAIL,
+        payload: { ...parseError(error), search: title },
+      });
     }
   };
 }
