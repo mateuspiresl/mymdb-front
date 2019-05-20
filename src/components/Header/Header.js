@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, type History } from 'react-router-dom';
+import { withRouter, type RouterHistory } from 'react-router-dom';
 
 import * as MoviesActions from '../../actions/MovieActions';
 import pages from '../../config/pages';
@@ -12,7 +12,7 @@ import './Header.scss';
 type Props = {
   page: string,
   fetchMoviesList: typeof MoviesActions.fetchMoviesList,
-  history: History,
+  history: RouterHistory,
 };
 
 const strings = {
@@ -34,7 +34,7 @@ function Header({ page, fetchMoviesList, history }: Props) {
     <div className="Header">
       <div className="left">
         {!isHome && (
-          <button type="button" onClick={() => history.pop()}>
+          <button type="button" onClick={() => history.goBack()}>
             {'<-'}
           </button>
         )}

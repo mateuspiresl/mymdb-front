@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 /* @flow */
 
-import type { AxiosError } from 'axios';
+import type { $AxiosError } from 'axios';
 
 type ErrorObject = { error: string };
 type ErrorMap = { [key: string]: ErrorObject };
@@ -41,7 +41,7 @@ export function errorParser(customErrorStatusMap?: StringErrorMap) {
     });
   }
 
-  return (error: AxiosError) => {
+  return (error: $AxiosError<any>) => {
     // Request errors
     if (error.response) {
       const { data, status } = error.response;
@@ -53,8 +53,8 @@ export function errorParser(customErrorStatusMap?: StringErrorMap) {
       }
 
       // Default and client mapped errors
-      if (errorStatusMap[status]) {
-        return errorStatusMap[status];
+      if (errorStatusMap[status.toString()]) {
+        return errorStatusMap[status.toString()];
       }
 
       // Unknown request error
@@ -63,7 +63,7 @@ export function errorParser(customErrorStatusMap?: StringErrorMap) {
 
     if (error.request) {
       // Connection errors
-      if (ERROR_CODE_MAP[error.code]) {
+      if (error.code && ERROR_CODE_MAP[error.code]) {
         return ERROR_CODE_MAP;
       }
 
