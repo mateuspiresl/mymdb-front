@@ -2,7 +2,7 @@
 
 @import './colors.scss';
 
-body {
+body, input {
   font-family: 'Montserrat', sans-serif;
   color: $light;
   -webkit-font-smoothing: antialiased;

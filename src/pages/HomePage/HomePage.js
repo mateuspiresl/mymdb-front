@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { withRouter, type RouterHistory } from 'react-router-dom';
 
 import Page from '../../components/Page';
-import Clickable from '../../components/Clickable';
 import pages from '../../config/pages';
 import type { PartialMovie } from '../../types/apiTypes';
+import Poster from './Poster';
 
 import './HomePage.scss';
 
@@ -21,9 +21,11 @@ function HomePage({ movies, history }: Props) {
     <Page className="HomePage" page={pages.home}>
       <div className="grid">
         {movies.map((movie: PartialMovie) => (
-          <Clickable key={movie.id} onClick={() => history.push(`/movies/${movie.id}`)}>
-            {movie.title}
-          </Clickable>
+          <Poster
+            key={movie.id}
+            movie={movie}
+            onClick={() => history.push(`/movies/${movie.id}`)}
+          />
         ))}
       </div>
     </Page>

@@ -1,13 +1,98 @@
 @import '../../stylesheets/colors.scss';
 
+$arrow-back-url: '../../images/baseline-arrow_back-24px.svg';
+$search-url: '../../images/baseline-search-24px.svg';
+$clear-url: '../../images/baseline-clear-24px.svg';
+
+@mixin define-icon($url, $size: 22px) {
+  width: $size;
+  height: $size;
+  -webkit-mask-image: url($url);
+  -webkit-mask-position: center;
+  -webkit-mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url($url);
+  mask-position: center;
+  mask-size: cover;
+  mask-repeat: no-repeat;
+}
+
 .Header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 46px;
+  font-size: 16px;
 
   .left {
-    justify-self: flex-start;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+
+    button {
+      margin-right: 10px;
+      background-color: $light;
+      @include define-icon($arrow-back-url);
+      cursor: pointer;
+
+      transition: background-color linear 0.2s;
+
+      &:hover {
+        background-color: $light2;
+        transition: background-color linear 0.2s;
+      }
+    }
+
+    .app-name {
+      font-weight: 600;
+      color: $light;
+    }
   }
 
-  .center {
-    justify-self: center;
+  .right {
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+
+    .clear-button {
+      @include define-icon($clear-url, 16px);
+
+      margin-right: 10px;
+      background-color: $grey2;
+      opacity: 0;
+      transition: opacity linear 0.1s;
+      cursor: pointer;
+      
+      &.visible {
+        opacity: 1;
+        transition: opacity linear 0.1s;
+      }
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      position: relative;
+      border-bottom: 1px solid $dark;
+
+      input {
+        margin: 2px 0px;
+        font-size: 16px;
+        border-bottom: none;
+      }
+
+      .search-icon {
+        @include define-icon($search-url);
+
+        display: inline-block;
+        background-color: $grey2;
+        transition: background-color linear 0.1s;
+      }
+      
+      input:focus ~ .search-icon {
+        background-color: $dark;
+        transition: background-color linear 0.1s;
+      }
+    }
   }
 }

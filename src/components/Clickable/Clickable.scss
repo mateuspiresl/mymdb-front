@@ -1,3 +1,7 @@
 .Clickable {
   cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
 }

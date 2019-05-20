@@ -33,7 +33,7 @@ export type PartialMovie = {|
   vote_average: number,
   popularity: number,
   genre_ids: Array<number>,
-  poster_path: string,
+  poster_path?: string,
   backdrop_path: string,
   video: boolean,
   adult: boolean,

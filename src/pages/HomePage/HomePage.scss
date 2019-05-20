@@ -1,5 +1,12 @@
 @import '../../stylesheets/breakpoints.scss';
+@import '../../stylesheets/colors.scss';
 
 .HomePage {
-  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, auto));
+    grid-column-gap: 6px;
+    grid-row-gap: 6px;
+    padding: 4px;
+  }
 }
