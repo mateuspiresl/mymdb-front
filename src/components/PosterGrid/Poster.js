@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import Clickable from '../../components/Clickable';
+import Clickable from '../Clickable';
 import { mergeStyles } from '../../utils/StyleUtils';
 import type { PartialMovie } from '../../types/apiTypes';
 
