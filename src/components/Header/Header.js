@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, type RouterHistory } from 'react-router-dom';
+import { useDebounce } from 'use-debounce';
+import throttle from 'lodash/throttle';
 
 import * as MoviesActions from '../../actions/MovieActions';
 import pages from '../../config/pages';
@@ -27,14 +29,15 @@ function Header({
   page, currentSearch, currentPage, loadedOnce, fetchMoviesList, history,
 }: Props) {
   const [search, setSearch] = useState(currentSearch);
+  const [debouncedSearch] = useDebounce(search, 300);
 
   const isHome = page === pages.home;
 
   useEffect(() => {
-    if (isHome && (search !== currentSearch || !loadedOnce)) {
-      fetchMoviesList(search);
+    if (isHome && (debouncedSearch !== currentSearch || !loadedOnce)) {
+      fetchMoviesList(debouncedSearch);
     }
-  }, [currentPage, fetchMoviesList, search, isHome]);
+  }, [currentPage, fetchMoviesList, debouncedSearch, isHome]);
 
   return (
     <div className="Header">
@@ -57,7 +60,7 @@ function Header({
           <button
             className={mergeStyles('clear-button', { visible: search })}
             type="button"
-            onClick={() => setSearch('')}
+            onClick={throttle(() => setSearch(''), 1000)}
           />
 
           <span className="search-container">
