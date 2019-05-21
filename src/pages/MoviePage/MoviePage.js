@@ -7,7 +7,7 @@ import type { Match } from 'react-router-dom';
 import Page from '../../components/Page';
 import pages from '../../config/pages';
 import * as MovieActions from '../../actions/MovieActions';
-import { BASE_URL } from '../../config/settings';
+import { BASE_URL } from '../../config/constants';
 import type { Movie } from '../../types/apiTypes';
 
 import './MoviePage.scss';

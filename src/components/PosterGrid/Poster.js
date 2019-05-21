@@ -4,7 +4,7 @@ import React from 'react';
 
 import Clickable from '../Clickable';
 import { mergeStyles } from '../../utils/StyleUtils';
-import { BASE_URL } from '../../config/settings';
+import { BASE_URL } from '../../config/constants';
 import type { PartialMovie } from '../../types/apiTypes';
 
 import './Poster.scss';
