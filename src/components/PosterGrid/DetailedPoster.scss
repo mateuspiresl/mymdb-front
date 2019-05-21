@@ -29,5 +29,14 @@
       left: 12px;
       bottom: 12px;
     }
+
+    .release {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: $grey;
+    }
   }
 }

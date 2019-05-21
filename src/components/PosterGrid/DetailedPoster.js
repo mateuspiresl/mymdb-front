@@ -40,6 +40,8 @@ function DetailedPoster({
         {genreName && (
           <Badge>{genreName}</Badge>
         )}
+
+        <span className="release">{movie.release_date}</span>
       </div>
     </Poster>
   );

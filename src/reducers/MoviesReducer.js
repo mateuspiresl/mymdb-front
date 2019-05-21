@@ -41,6 +41,13 @@ const initialState: State = {
   },
 };
 
+function parseData(data) {
+  return {
+    ...data,
+    release_date: new Date(data.release_date).toLocaleDateString(),
+  };
+}
+
 function movieReducer(state: MovieState, { type, payload = {} }: Action): MovieState {
   switch (type) {
     case types.MOVIES_FETCH:
@@ -52,7 +59,11 @@ function movieReducer(state: MovieState, { type, payload = {} }: Action): MovieS
       };
 
     case types.MOVIES_FETCH_SUCCESS:
-      return { ...state, data: payload.data, loading: false };
+      return {
+        ...state,
+        data: parseData(payload.data),
+        loading: false,
+      };
 
     case types.MOVIES_FETCH_FAIL:
       return { ...state, error: payload.error, loading: false };
@@ -82,7 +93,7 @@ function listReducer(state: ListState, { type, payload = {} }: Action): ListStat
       if (payload.data.page === 1) {
         return {
           ...state,
-          data: payload.data.results,
+          data: payload.data.results.map(parseData),
           page: payload.data.page,
           hasMore: payload.data.total_pages > payload.data.page,
           loading: false,
@@ -92,7 +103,7 @@ function listReducer(state: ListState, { type, payload = {} }: Action): ListStat
       if (payload.data.page === state.page + 1) {
         return {
           ...state,
-          data: [...state.data, ...payload.data.results],
+          data: [...state.data, ...payload.data.results.map(parseData)],
           page: payload.data.page,
           hasMore: payload.data.total_pages > payload.data.page,
           loading: false,
