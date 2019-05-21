@@ -4,7 +4,7 @@ import React from 'react';
 import { withRouter, type RouterHistory } from 'react-router-dom';
 
 import type { PartialMovie } from '../../types/apiTypes';
-import Poster from './Poster';
+import DetailedPoster from './DetailedPoster';
 import LoadingPoster from './LoadingPoster';
 
 import './PosterGrid.scss';
@@ -19,7 +19,7 @@ function PosterGrid({ movies, loading, history }: Props) {
   return (
     <div className="PosterGrid">
       {movies.map((movie: PartialMovie) => (
-        <Poster
+        <DetailedPoster
           key={movie.id}
           movie={movie}
           onClick={() => history.push(`/movies/${movie.id}`)}

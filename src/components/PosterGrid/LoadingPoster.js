@@ -2,22 +2,22 @@
 
 import React from 'react';
 
+import Poster from '../Poster';
 import { mergeStyles } from '../../utils/StyleUtils';
 
 import './LoadingPoster.scss';
-import './Poster.scss';
 
 type Props = {
   className?: string,
 };
 
 function LoadingPoster({ className }: Props) {
-  const classes = mergeStyles('Poster', 'LoadingPoster', className);
+  const classes = mergeStyles('LoadingPoster', className);
 
   return (
-    <div className={classes}>
+    <Poster className={classes}>
       <div className="container" />
-    </div>
+    </Poster>
   );
 }
 

@@ -3,41 +3,35 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Clickable from '../Clickable';
+import Poster from '../Poster';
 import Badge from '../Badge';
 import Rate from '../Rate';
 import { mergeStyles } from '../../utils/StyleUtils';
-import { BASE_URL } from '../../config/constants';
 import type { PartialMovie, Genre } from '../../types/apiTypes';
 
-import './Poster.scss';
+import './DetailedPoster.scss';
 
 type Props = {
   className?: string,
   movie: PartialMovie,
-  onClick: Function,
   genres: Array<Genre>,
+  onClick: Function,
 };
 
-function getImageSource(path: string) {
-  return `${BASE_URL}/images/${path}?original=false`;
-}
-
-function Poster({
+function DetailedPoster({
   className, movie, onClick, genres,
 }: Props) {
-  const classes = mergeStyles('Poster', className);
+  const classes = mergeStyles('DetailedPoster', className);
   const genreId = movie.genre_ids.find(id => genres[id]);
   const genreName = genreId ? genres[genreId].name : null;
 
   return (
-    <Clickable className={classes} onClick={onClick}>
-      <div className="container image">
-        {movie.poster_path && (
-          <img src={getImageSource(movie.poster_path)} alt={movie.title} />
-        )}
-      </div>
-
+    <Poster
+      className={classes}
+      title={movie.title}
+      imagePath={movie.poster_path}
+      onClick={onClick}
+    >
       <div className={mergeStyles('container info', { always: !movie.poster_path })}>
         <h3>{movie.title}</h3>
 
@@ -47,11 +41,11 @@ function Poster({
           <Badge>{genreName}</Badge>
         )}
       </div>
-    </Clickable>
+    </Poster>
   );
 }
 
-Poster.defaultProps = {
+DetailedPoster.defaultProps = {
   className: undefined,
 };
 
@@ -59,4 +53,4 @@ const mapStateToProps = ({ genres }) => ({
   genres: genres.map || {},
 });
 
-export default connect(mapStateToProps)(Poster);
+export default connect(mapStateToProps)(DetailedPoster);
