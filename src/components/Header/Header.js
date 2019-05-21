@@ -15,7 +15,6 @@ import { mergeStyles } from '../../utils/StyleUtils';
 type Props = {
   page: string,
   currentSearch: string,
-  currentPage: number,
   loadedOnce: boolean,
   fetchMoviesList: typeof MoviesActions.fetchMoviesList,
   history: RouterHistory,
@@ -26,7 +25,7 @@ const strings = {
 };
 
 function Header({
-  page, currentSearch, currentPage, loadedOnce, fetchMoviesList, history,
+  page, currentSearch, loadedOnce, fetchMoviesList, history,
 }: Props) {
   const [search, setSearch] = useState(currentSearch);
   const [debouncedSearch] = useDebounce(search, 300);
@@ -37,7 +36,7 @@ function Header({
     if (isHome && (debouncedSearch !== currentSearch || !loadedOnce)) {
       fetchMoviesList(debouncedSearch);
     }
-  }, [currentPage, fetchMoviesList, debouncedSearch, isHome]);
+  }, [currentSearch, loadedOnce, fetchMoviesList, debouncedSearch, isHome]);
 
   return (
     <div className="Header">
