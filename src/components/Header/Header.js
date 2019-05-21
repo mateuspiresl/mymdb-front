@@ -12,7 +12,9 @@ import { mergeStyles } from '../../utils/StyleUtils';
 
 type Props = {
   page: string,
-  search: string,
+  currentSearch: string,
+  currentPage: number,
+  loadedOnce: boolean,
   fetchMoviesList: typeof MoviesActions.fetchMoviesList,
   history: RouterHistory,
 };
@@ -22,17 +24,17 @@ const strings = {
 };
 
 function Header({
-  page, search: initialSearch, fetchMoviesList, history,
+  page, currentSearch, currentPage, loadedOnce, fetchMoviesList, history,
 }: Props) {
-  const [search, setSearch] = useState(initialSearch);
+  const [search, setSearch] = useState(currentSearch);
 
   const isHome = page === pages.home;
 
   useEffect(() => {
-    if (isHome) {
+    if (isHome && (search !== currentSearch || !loadedOnce)) {
       fetchMoviesList(search);
     }
-  }, [isHome, fetchMoviesList, search]);
+  }, [currentPage, fetchMoviesList, search, isHome]);
 
   return (
     <div className="Header">
@@ -68,8 +70,12 @@ function Header({
   );
 }
 
-const mapStateToProps = ({ movies }) => ({
-  search: movies.list.search,
+const mapStateToProps = ({
+  movies: { list },
+}) => ({
+  currentSearch: list.search,
+  currentPage: list.page,
+  loadedOnce: list.loadedOnce,
 });
 
 const mapActionsToProps = {

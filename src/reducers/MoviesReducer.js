@@ -36,6 +36,7 @@ const initialState: State = {
     page: 0,
     hasMore: false,
     loading: false,
+    loadedOnce: false,
     error: null,
   },
 };
@@ -67,6 +68,7 @@ function listReducer(state: ListState, { type, payload = {} }: Action): ListStat
         ...state,
         search: payload.search,
         loading: true,
+        loadedOnce: true,
         error: null,
       };
 
@@ -81,6 +83,7 @@ function listReducer(state: ListState, { type, payload = {} }: Action): ListStat
           ...state,
           data: payload.data.results,
           page: payload.data.page,
+          hasMore: payload.data.total_pages > payload.data.page,
           loading: false,
         };
       }
@@ -90,6 +93,7 @@ function listReducer(state: ListState, { type, payload = {} }: Action): ListStat
           ...state,
           data: [...state.data, ...payload.data.results],
           page: payload.data.page,
+          hasMore: payload.data.total_pages > payload.data.page,
           loading: false,
         };
       }
@@ -108,7 +112,7 @@ function listReducer(state: ListState, { type, payload = {} }: Action): ListStat
   }
 }
 
-export default function AuthReducer(
+export default function MoviesReducer(
   state: State = initialState,
   { type, payload }: Action,
 ): State {
