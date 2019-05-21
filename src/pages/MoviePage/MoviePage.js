@@ -58,12 +58,16 @@ function MoviePage({
     );
   }
 
-  const backdropClass = mergeStyles('backdrop', { blur: !movie.backdrop_path });
   const backdropImage = getImageSource(movie.backdrop_path || movie.poster_path);
+  const classes = mergeStyles('MoviePage', { 'no-backdrop': !backdropImage });
 
   return (
-    <Page className="MoviePage" page={pages.movie} error={error}>
-      <img className={backdropClass} src={backdropImage} alt={movie.title} />
+    <Page className={classes} page={pages.movie} error={error}>
+      <img
+        className={mergeStyles('backdrop', { blur: !movie.backdrop_path })}
+        src={backdropImage}
+        alt={movie.title}
+      />
 
       <div className="container">
         <div className="overlay">
@@ -74,7 +78,10 @@ function MoviePage({
           )}
 
           <div className="info">
-            <p className="tagline">{movie.tagline}</p>
+            {movie.tagline && (
+              <p className="tagline">{movie.tagline}</p>
+            )}
+
             <h2 className="title">{movie.title}</h2>
             <span className="release">{movie.release_date}</span>
             <p className="overview">{movie.overview}</p>

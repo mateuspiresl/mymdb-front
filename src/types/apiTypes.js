@@ -56,7 +56,7 @@ export type Movie = {
   imdb_id: string,
   status: string,
   genres: Genre[],
-  tagline: string,
+  tagline: ?string,
   budget: number,
   revenue: number,
   runtime: number,

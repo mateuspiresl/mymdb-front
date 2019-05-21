@@ -87,7 +87,7 @@
   }
 
   @media screen and (max-width: $lg) {
-    .container .overlay {
+    &:not(.no-backdrop) .container .overlay {
       margin: 48vh 12vw 24px;
     }
   }
@@ -117,6 +117,12 @@
   @media screen and (max-width: $xs) {
     .container .overlay {
       margin: 16vh 6vw 16px;
+    }
+  }
+
+  &.no-backdrop {
+    .container .overlay {
+      margin: 30px 6vw 16px;
     }
   }
 }

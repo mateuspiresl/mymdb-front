@@ -11,7 +11,7 @@ import './Poster.scss';
 type Props = {
   className?: string,
   title?: string,
-  imagePath?: string,
+  imagePath?: ?string,
   onClick?: Function,
   children?: Node,
 };
