@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import Clickable from '../Clickable';
 import Badge from '../Badge';
+import Rate from '../Rate';
 import { mergeStyles } from '../../utils/StyleUtils';
 import { BASE_URL } from '../../config/constants';
 import type { PartialMovie, Genre } from '../../types/apiTypes';
@@ -39,7 +40,8 @@ function Poster({
 
       <div className={mergeStyles('container info', { always: !movie.poster_path })}>
         <h3>{movie.title}</h3>
-        <span>{movie.vote_average}</span>
+
+        <Rate rate={movie.vote_average} />
 
         {genreName && (
           <Badge>{genreName}</Badge>
