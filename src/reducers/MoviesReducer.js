@@ -67,6 +67,7 @@ function listReducer(state: ListState, { type, payload = {} }: Action): ListStat
       return {
         ...state,
         search: payload.search,
+        data: state.search === payload.search ? state.data : [],
         loading: true,
         loadedOnce: true,
         error: null,
