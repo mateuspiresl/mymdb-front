@@ -1,7 +1,33 @@
+@import '../../stylesheets/colors.scss';
+
 .Page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  > .error {
+    display: flex;
+    justify-content: center;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height ease-in-out 0.8s;
+    
+    &.visible {
+      max-height: 100px;
+      transition: max-height ease-in-out 0.8s;
+    }
+
+    .message {
+      display: inline-block;
+      margin: 4px 0 12px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-weight: 500;
+      color: $light2;
+      background-color: $red;
+      overflow: hidden;
+    }
+  }
 
   > .content {
     flex: 1;

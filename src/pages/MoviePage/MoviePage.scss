@@ -12,6 +12,12 @@ $icon-url: '../../images/baseline-star-24px.svg';
     mask-image: linear-gradient(white, white, white, transparent);
   }
 
+  .loading,
+  .error {
+    text-align: center;
+    font-weight: 600;
+  }
+
   .backdrop {
     position: fixed;
     top: 0;

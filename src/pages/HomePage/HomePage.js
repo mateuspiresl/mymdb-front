@@ -18,6 +18,7 @@ type Props = {
   page: number,
   hasMore: boolean,
   loading: boolean,
+  error: string,
   fetchMoviesList: typeof MovieActions.fetchMoviesList,
 };
 
@@ -25,7 +26,7 @@ const MIN_POSTER_HEIGHT = 240 * 1.5;
 const FETCH_BEFORE_N_POSTERS = 4;
 
 function HomePage({
-  search, movies, page, hasMore, loading, fetchMoviesList,
+  search, movies, page, hasMore, loading, error, fetchMoviesList,
 }: Props) {
   // Fetch more movies before the scroll to the bottom
   useEffect(() => {
@@ -51,8 +52,8 @@ function HomePage({
   }, [search, page, hasMore, loading, fetchMoviesList]);
 
   return (
-    <Page className="HomePage" page={pages.home}>
-      <PosterGrid movies={movies} hasMore={hasMore} />
+    <Page className="HomePage" page={pages.home} error={error}>
+      <PosterGrid movies={movies} loading={hasMore || loading} />
     </Page>
   );
 }
@@ -65,6 +66,7 @@ const mapStateToProps = ({
   page: list.page,
   hasMore: list.hasMore,
   loading: list.loading,
+  error: list.error,
 });
 
 const mapActionsToProps = {

@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { useState, useEffect, type Node } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import type { Match } from 'react-router-dom';
 
@@ -20,19 +20,11 @@ type Props = {
 };
 
 const strings = {
-  loading: 'loading',
+  loading: 'Loading...',
 };
 
 function getImageSource(path: string) {
   return `https://image.tmdb.org/t/p/original${path}`;
-}
-
-function render(content: Node) {
-  return (
-    <Page className="MoviePage" page={pages.movie}>
-      {content}
-    </Page>
-  );
 }
 
 function MoviePage({
@@ -49,16 +41,20 @@ function MoviePage({
     }
   }, [movie, loading, fetchMovie, match, firstLoad]);
 
-  if (error) {
-    return render(<p>{error}</p>);
+  if (loading || !movie || error) {
+    return (
+      <Page className="MoviePage" page={pages.movie} error={error}>
+        {!error && (
+          <p className="loading">
+            {strings.loading}
+          </p>
+        )}
+      </Page>
+    );
   }
 
-  if (loading || !movie) {
-    return render(<p>{strings.loading}</p>);
-  }
-
-  return render((
-    <>
+  return (
+    <Page className="MoviePage" page={pages.movie} error={error}>
       <img className="backdrop" src={getImageSource(movie.backdrop_path)} alt={movie.title} />
       <div className="container">
         <div className="overlay">
@@ -71,8 +67,8 @@ function MoviePage({
           </p>
         </div>
       </div>
-    </>
-  ));
+    </Page>
+  );
 }
 
 const mapStateToProps = ({

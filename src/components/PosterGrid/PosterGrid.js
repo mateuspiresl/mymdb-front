@@ -11,11 +11,11 @@ import './PosterGrid.scss';
 
 type Props = {
   movies: PartialMovie[],
-  hasMore: boolean,
+  loading: boolean,
   history: RouterHistory,
 };
 
-function PosterGrid({ movies, hasMore, history }: Props) {
+function PosterGrid({ movies, loading, history }: Props) {
   return (
     <div className="PosterGrid">
       {movies.map((movie: PartialMovie) => (
@@ -26,7 +26,7 @@ function PosterGrid({ movies, hasMore, history }: Props) {
         />
       ))}
 
-      {hasMore && (
+      {loading && (
         <>
           <LoadingPoster />
           <LoadingPoster />
