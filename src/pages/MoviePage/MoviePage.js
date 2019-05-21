@@ -7,6 +7,7 @@ import type { Match } from 'react-router-dom';
 import Page from '../../components/Page';
 import pages from '../../config/pages';
 import * as MovieActions from '../../actions/MovieActions';
+import { BASE_URL } from '../../config/settings';
 import type { Movie } from '../../types/apiTypes';
 
 import './MoviePage.scss';
@@ -24,7 +25,7 @@ const strings = {
 };
 
 function getImageSource(path: string) {
-  return `https://image.tmdb.org/t/p/original${path}`;
+  return `${BASE_URL}/images/${path}?original=true`;
 }
 
 function MoviePage({

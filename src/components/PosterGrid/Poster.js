@@ -4,6 +4,7 @@ import React from 'react';
 
 import Clickable from '../Clickable';
 import { mergeStyles } from '../../utils/StyleUtils';
+import { BASE_URL } from '../../config/settings';
 import type { PartialMovie } from '../../types/apiTypes';
 
 import './Poster.scss';
@@ -15,7 +16,7 @@ type Props = {
 };
 
 function getImageSource(path: string) {
-  return `https://image.tmdb.org/t/p/w500${path}`;
+  return `${BASE_URL}/images/${path}?original=false`;
 }
 
 function Poster({ className, movie, onClick }: Props) {

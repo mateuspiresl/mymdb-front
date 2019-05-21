@@ -2,7 +2,8 @@
 
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:1337';
+import { BASE_URL } from './settings';
+
 const DEFAULT_HEADERS = { 'content-type': 'application/x-www-form-urlencoded' };
 
 export default axios.create({
