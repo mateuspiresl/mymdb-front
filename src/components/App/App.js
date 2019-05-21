@@ -1,4 +1,4 @@
-// @flow
+/* @flow */
 
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -17,7 +17,7 @@ function App({ fetchGenresList }: Props) {
   // Requets start up data
   useEffect(() => {
     fetchGenresList();
-  }, []);
+  }, [fetchGenresList]);
 
   return (
     <BrowserRouter>
