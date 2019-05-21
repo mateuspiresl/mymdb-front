@@ -61,6 +61,13 @@ $icon-url: '../../images/baseline-star-24px.svg';
           background-color: $grey2;
         }
       }
+
+      .genres {
+        .Badge {
+          margin-top: 8px;
+          margin-right: 8px;
+        }
+      }
     }
   }
 

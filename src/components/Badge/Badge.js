@@ -8,11 +8,12 @@ import './Badge.scss';
 
 type Props = {
   className?: string,
+  highlight?: boolean,
   children: Node,
 };
 
-function Badge({ className, children }: Props) {
-  const classes = mergeStyles('Badge', className);
+function Badge({ className, highlight, children }: Props) {
+  const classes = mergeStyles('Badge', { highlight }, className);
 
   return (
     <div className={classes}>
@@ -23,6 +24,7 @@ function Badge({ className, children }: Props) {
 
 Badge.defaultProps = {
   className: undefined,
+  highlight: false,
 };
 
 export default Badge;

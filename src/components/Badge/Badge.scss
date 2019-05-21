@@ -1,11 +1,16 @@
 @import '../../stylesheets/colors.scss';
 
 .Badge {
-  display: inline;
+  display: inline-block;
   padding: 3px 5px;
   border-radius: 3px;
   font-size: 14px;
   font-weight: 500;
   color: $grey2;
   background-color: $black3;
+
+  &.highlight {
+    color: $black2;
+    background-color: $light2;
+  }
 }

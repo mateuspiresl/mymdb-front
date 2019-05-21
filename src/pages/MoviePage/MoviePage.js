@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import type { Match } from 'react-router-dom';
 
 import Page from '../../components/Page';
+import Badge from '../../components/Badge';
 import pages from '../../config/pages';
 import * as MovieActions from '../../actions/MovieActions';
 import { BASE_URL } from '../../config/constants';
@@ -62,10 +63,19 @@ function MoviePage({
           <p className="tagline">{movie.tagline}</p>
           <h2 className="title">{movie.title}</h2>
           <p className="overview">{movie.overview}</p>
+
           <p className="rate">
             <span className="start-icon" />
             {movie.vote_average}
           </p>
+
+          <div className="genres">
+            {movie.genres.map((genre, index) => (
+              <Badge key={genre.id} highlight={index === 0}>
+                {genre.name}
+              </Badge>
+            ))}
+          </div>
         </div>
       </div>
     </Page>
