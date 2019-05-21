@@ -7,6 +7,7 @@ import type { Match } from 'react-router-dom';
 import Page from '../../components/Page';
 import Badge from '../../components/Badge';
 import Rate from '../../components/Rate';
+import Poster from '../../components/Poster';
 import pages from '../../config/pages';
 import * as MovieActions from '../../actions/MovieActions';
 import { BASE_URL } from '../../config/constants';
@@ -61,18 +62,25 @@ function MoviePage({
       <img className="backdrop" src={getImageSource(movie.backdrop_path)} alt={movie.title} />
       <div className="container">
         <div className="overlay">
-          <p className="tagline">{movie.tagline}</p>
-          <h2 className="title">{movie.title}</h2>
-          <p className="overview">{movie.overview}</p>
+          <div className="poster">
+            <Poster key={movie.id} title={movie.title} imagePath={movie.poster_path} />
+          </div>
 
-          <Rate rate={movie.vote_average} />
+          <div className="info">
+            <p className="tagline">{movie.tagline}</p>
+            <h2 className="title">{movie.title}</h2>
+            <span className="release">{movie.release_date}</span>
+            <p className="overview">{movie.overview}</p>
 
-          <div className="genres">
-            {movie.genres.map((genre, index) => (
-              <Badge key={genre.id} highlight={index === 0}>
-                {genre.name}
-              </Badge>
-            ))}
+            <Rate rate={movie.vote_average} />
+
+            <div className="genres">
+              {movie.genres.map((genre, index) => (
+                <Badge key={genre.id} highlight={index === 0}>
+                  {genre.name}
+                </Badge>
+              ))}
+            </div>
           </div>
         </div>
       </div>
