@@ -22,6 +22,11 @@
     z-index: -1;
     -webkit-mask-image: linear-gradient(white, white, transparent);
     mask-image: linear-gradient(white, white, transparent);
+
+    &.blur {
+      opacity: 0.4;
+      filter: blur(8px);
+    }
   }
 
   .container {
@@ -44,6 +49,7 @@
         min-width: 185px;
         max-width: 240px;
         height: 100%;
+        margin-right: 32px;
 
         .Poster {
           margin: 16px 16px 0 0;
@@ -54,7 +60,6 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        margin-left: 32px;
 
         .tagline {
           text-align: center;

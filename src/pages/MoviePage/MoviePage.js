@@ -14,6 +14,7 @@ import { BASE_URL } from '../../config/constants';
 import type { Movie } from '../../types/apiTypes';
 
 import './MoviePage.scss';
+import { mergeStyles } from '../../utils/StyleUtils';
 
 type Props = {
   movie: Movie,
@@ -27,8 +28,8 @@ const strings = {
   loading: 'Loading...',
 };
 
-function getImageSource(path: string) {
-  return `${BASE_URL}/images/${path}?original=true`;
+function getImageSource(path: ?string): ?string {
+  return path ? `${BASE_URL}/images/${path}?original=true` : null;
 }
 
 function MoviePage({
@@ -57,14 +58,20 @@ function MoviePage({
     );
   }
 
+  const backdropClass = mergeStyles('backdrop', { blur: !movie.backdrop_path });
+  const backdropImage = getImageSource(movie.backdrop_path || movie.poster_path);
+
   return (
     <Page className="MoviePage" page={pages.movie} error={error}>
-      <img className="backdrop" src={getImageSource(movie.backdrop_path)} alt={movie.title} />
+      <img className={backdropClass} src={backdropImage} alt={movie.title} />
+
       <div className="container">
         <div className="overlay">
-          <div className="poster">
-            <Poster key={movie.id} title={movie.title} imagePath={movie.poster_path} />
-          </div>
+          {movie.poster_path && (
+            <div className="poster">
+              <Poster key={movie.id} title={movie.title} imagePath={movie.poster_path} />
+            </div>
+          )}
 
           <div className="info">
             <p className="tagline">{movie.tagline}</p>

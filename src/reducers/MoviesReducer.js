@@ -5,9 +5,9 @@ import type { Movie, PartialMovie } from '../types/apiTypes';
 import type { Action } from '../types/reduxTypes';
 
 type MovieState = {
-  +data: Movie | null,
+  +data: ?Movie,
   +loading: boolean,
-  +error: string | null,
+  +error: ?string,
 };
 
 type ListState = {
@@ -16,7 +16,7 @@ type ListState = {
   +page: number,
   +hasMore: boolean,
   +loading: boolean,
-  +error: string | null,
+  +error: ?string,
 };
 
 type State = {
@@ -41,10 +41,10 @@ const initialState: State = {
   },
 };
 
-function parseData(data) {
+function parseData(data: Movie | PartialMovie) {
   return {
     ...data,
-    release_date: new Date(data.release_date).toLocaleDateString(),
+    release_date: data.release_date ? new Date(data.release_date).toLocaleDateString() : null,
   };
 }
 
