@@ -1,9 +1,5 @@
-// @flow
-
-// Remove this command if more functions are included here [MP]
 /* eslint-disable import/prefer-default-export */
-
-type Style = string | Object | typeof undefined | null;
+/* @flow */
 
 /**
  * Merge styles in a classes names string.
@@ -13,9 +9,8 @@ type Style = string | Object | typeof undefined | null;
  * Calling mergeStyles('first', { second: false, third: true }, undefined, null, 'last')
  * results in "first third last".
  * @param  {...any} styles Styles to apply.
- * [MP]
  */
-export function mergeStyles(...styles: Array<Style>) {
+export function mergeStyles(...styles: Array<any>) {
   const classNames = [];
 
   styles.forEach((style) => {

@@ -1,17 +1,24 @@
 // @flow
 
-import React from 'react';
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import HomePage from '../../pages/HomePage';
 import MoviePage from '../../pages/MoviePage';
 import NotFoundPage from '../../pages/NotFoundPage';
+import * as GenresActions from '../../actions/GenresActions';
 
-function App() {
+type Props = {
+  fetchGenresList: typeof GenresActions.fetchGenresList,
+};
+
+function App({ fetchGenresList }: Props) {
+  // Requets start up data
+  useEffect(() => {
+    fetchGenresList();
+  }, []);
+
   return (
     <BrowserRouter>
       <Switch>
@@ -23,4 +30,8 @@ function App() {
   );
 }
 
-export default App;
+const mapActionsToProps = {
+  fetchGenresList: GenresActions.fetchGenresList,
+};
+
+export default connect(null, mapActionsToProps)(App);
