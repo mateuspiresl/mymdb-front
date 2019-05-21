@@ -6,6 +6,7 @@ import type { Match } from 'react-router-dom';
 
 import Page from '../../components/Page';
 import Badge from '../../components/Badge';
+import Rate from '../../components/Rate';
 import pages from '../../config/pages';
 import * as MovieActions from '../../actions/MovieActions';
 import { BASE_URL } from '../../config/constants';
@@ -64,10 +65,7 @@ function MoviePage({
           <h2 className="title">{movie.title}</h2>
           <p className="overview">{movie.overview}</p>
 
-          <p className="rate">
-            <span className="start-icon" />
-            {movie.vote_average}
-          </p>
+          <Rate rate={movie.vote_average} />
 
           <div className="genres">
             {movie.genres.map((genre, index) => (
