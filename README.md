@@ -9,7 +9,7 @@ The presentation layer is located in the `pages` folder, which uses components f
 The domain layer is located in the `actions` and `reducers` folders.
 
 - The actions defines the ways the data can change in response to the use inputs.
-- The reducers defines how the data changes and also how it is structured.
+- The reducers defines how the data changes.
 
 The data access layer is located at the `api` folder. There are made all the requests to the API.
 
