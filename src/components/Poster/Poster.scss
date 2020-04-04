@@ -1,0 +1,25 @@
+@import '../../stylesheets/colors.scss';
+
+.Poster {
+  flex: 0;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  padding-top: 100% * 1.5;
+  border-radius: 6px;
+  overflow: hidden;
+
+  .container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    &.image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

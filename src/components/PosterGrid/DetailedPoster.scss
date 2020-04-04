@@ -1,0 +1,42 @@
+@import '../../stylesheets/colors.scss';
+
+.DetailedPoster {
+  .container.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 16px;
+    background-color: $black-80p;
+
+    opacity: 0;
+    -webkit-transition: opacity linear 0.2s;
+    transition: opacity linear 0.2s;
+    
+    &.always,
+    &:hover {
+      opacity: 1;
+      -webkit-transition: opacity linear 0.2s;
+      transition: opacity linear 0.2s;
+    }
+
+    h3 {
+      text-align: center;
+    }
+
+    .Badge {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+    }
+
+    .release {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: $grey;
+    }
+  }
+}

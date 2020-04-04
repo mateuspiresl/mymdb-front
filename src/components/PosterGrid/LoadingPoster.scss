@@ -1,0 +1,35 @@
+@import '../../stylesheets/colors.scss';
+
+@mixin define-background($lightness) {
+  background-color: rgba($lightness, $lightness, $lightness, 1);
+  animation-name: fade-#{$lightness};
+
+  @keyframes fade-#{$lightness} {
+    0% { background-color: rgba($lightness, $lightness, $lightness, 1); }
+    50% { background-color: rgba($lightness, $lightness, $lightness, 0); }
+    100% { background-color: rgba($lightness, $lightness, $lightness, 1); }
+  }
+}
+
+.LoadingPoster {
+  .container {
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+  
+  &:nth-last-of-type(3) .container {
+    @include define-background(100);
+    animation-delay: 0s;
+  }
+  
+  &:nth-last-of-type(2) .container {
+    @include define-background(75);
+    animation-delay: 0.4s;
+  }
+  
+  &:nth-last-of-type(1) .container {
+    @include define-background(45);
+    animation-delay: 0.8s;
+  }
+}

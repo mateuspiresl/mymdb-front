@@ -1,0 +1,86 @@
+@import '../../stylesheets/colors.scss';
+@import '../../stylesheets/helpers.scss';
+
+$arrow-back-url: '../../images/baseline-arrow_back-24px.svg';
+$search-url: '../../images/baseline-search-24px.svg';
+$clear-url: '../../images/baseline-clear-24px.svg';
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 46px;
+  font-size: 16px;
+
+  .left {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+
+    button {
+      margin-right: 10px;
+      background-color: $light;
+      @include define-icon($arrow-back-url);
+      cursor: pointer;
+
+      transition: background-color linear 0.2s;
+
+      &:hover {
+        background-color: $light2;
+        transition: background-color linear 0.2s;
+      }
+    }
+
+    .app-name {
+      font-weight: 600;
+      color: $light;
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+
+    .clear-button {
+      @include define-icon($clear-url, 16px);
+
+      margin-right: 10px;
+      background-color: $grey2;
+      opacity: 0;
+      transition: opacity linear 0.1s;
+      cursor: pointer;
+      
+      &.visible {
+        opacity: 1;
+        transition: opacity linear 0.1s;
+      }
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      position: relative;
+      border-bottom: 1px solid $dark;
+
+      input {
+        margin: 2px 0px;
+        font-size: 16px;
+        border-bottom: none;
+      }
+
+      .search-icon {
+        @include define-icon($search-url);
+
+        display: inline-block;
+        background-color: $grey2;
+        transition: background-color linear 0.1s;
+      }
+      
+      input:focus ~ .search-icon {
+        background-color: $dark;
+        transition: background-color linear 0.1s;
+      }
+    }
+  }
+}

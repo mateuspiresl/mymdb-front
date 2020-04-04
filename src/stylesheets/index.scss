@@ -1,0 +1,17 @@
+@import './typography.scss';
+@import './colors.scss';
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $black2;
+}
+
+input {
+  padding: 4px;
+  color: $light;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid $dark;
+  outline: none;
+}
